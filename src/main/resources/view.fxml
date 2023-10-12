@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="510.0" prefWidth="792.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.StageController">
+   <children>
+      <Pane fx:id="topBar" onDragDetected="#dragStage" prefHeight="61.0" prefWidth="792.0" style="-fx-background-color: #D68688;" stylesheets="@main.css">
+         <children>
+            <Pane id="exit-button" fx:id="exitButton" layoutX="728.0" layoutY="7.0" prefHeight="47.0" prefWidth="58.0" style="-fx-background-color: #985460;" />
+            <Pane id="max-button" fx:id="maxButton" layoutX="670.0" layoutY="7.0" prefHeight="47.0" prefWidth="58.0" style="-fx-background-color: #985460;" />
+            <Pane id="min-button" fx:id="minButton" layoutX="612.0" layoutY="7.0" prefHeight="47.0" prefWidth="58.0" style="-fx-background-color: #985460;" styleClass="min-button" stylesheets="@main.css" />
+         </children>
+      </Pane>
+      <TextArea id="current-puzzle" fx:id="currentPuzzle" editable="false" layoutX="508.0" layoutY="454.0" prefHeight="39.0" prefWidth="200.0" text="Current Puzzle: x out of y" />
+    <AnchorPane layoutX="592.0" layoutY="190.0" minHeight="0.0" minWidth="0.0" prefHeight="106.0" prefWidth="169.0" />
+      <TextArea id="how-to-bar" editable="false" layoutX="448.0" layoutY="89.0" prefHeight="38.0" prefWidth="320.0" style="-fx-control-inner-background: #D68688; -fx-background-color: #D68688;" text="How to Play:" />
+      <Pane id="puzzle-container" fx:id="puzzleContainer" layoutX="25.0" layoutY="79.0" prefHeight="414.0" prefWidth="406.0" style="-fx-background-color: gray;" />
+      <TextArea id="how-to-text" editable="false" layoutX="448.0" layoutY="114.0" prefHeight="165.0" prefWidth="320.0" stylesheets="@main.css" text="Black tiles represent walls, and gold tiles represent lamps.&#10;Tiles with numbers represent clues.&#10;If a clue tile turns green, it is satisfied. &#10;If it turns red, there are too many lamps next to it.&#10;If a lamp turns orange, it is placed illegally &#10;(in the direct light of another lamp).&#10;&#10;To place or remove a lamp, click a corridor&#10;Light up the entire board and satisfy all clues to win!" />
+      <ImageView id="status" fitHeight="74.0" fitWidth="200.0" layoutX="418.0" layoutY="222.0" pickOnBounds="true" preserveRatio="true" />
+      <Pane fx:id="statusBox" layoutX="493.0" layoutY="312.0" prefHeight="106.0" prefWidth="231.0" />
+   </children>
+</Pane>

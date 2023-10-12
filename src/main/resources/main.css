@@ -6,6 +6,14 @@
  *   scene.getStylesheets().add("main.css");
  */
 
- .padding {
-    -fx-padding: 10 0 0 0;
+.root {
+    -fx-background-color: #111111;
+}
+
+.min-button {
+    -fx-background-color:  #D68688;
+ }
+
+ #min-button {
+    -fx-background-color:  #D68688;
  }

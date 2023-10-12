@@ -1,7 +1,13 @@
 package com.comp301.a09akari;
 
 import com.comp301.a09akari.model.*;
+import model.ModelImpl;
+import model.Puzzle;
+import model.PuzzleImpl;
+import model.PuzzleLibraryImpl;
 import org.junit.Test;
+
+import java.io.IOException;
 
 import static org.junit.Assert.*;
 
@@ -53,7 +59,7 @@ public class AppTest {
   }
 
   @Test
-  public void lampTest2() {
+  public void lampTest2() throws IOException {
 
     PuzzleLibraryImpl pl = new PuzzleLibraryImpl();
     Puzzle p = new PuzzleImpl(puz);
