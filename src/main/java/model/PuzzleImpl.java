@@ -1,23 +1,23 @@
 package model;
 
-public class PuzzleImpl implements Puzzle {
+public class PuzzleImpl {
   private final int[][] b;
 
   public PuzzleImpl(int[][] board) {
     b = board;
   }
 
-  @Override
+
   public int getWidth() {
     return b[0].length;
   }
 
-  @Override
+
   public int getHeight() {
     return b.length;
   }
 
-  @Override
+
   public CellType getCellType(int r, int c) {
     if (r < 0 || r >= getHeight() || c < 0 || c >= getWidth()) {
       throw new IndexOutOfBoundsException();
@@ -35,7 +35,7 @@ public class PuzzleImpl implements Puzzle {
     }
   }
 
-  @Override
+
   public int getClue(int r, int c) {
     if (r < 0 || r >= getHeight() || c < 0 || c >= getWidth()) {
       throw new IndexOutOfBoundsException();

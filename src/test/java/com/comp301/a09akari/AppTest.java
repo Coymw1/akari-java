@@ -37,7 +37,7 @@ public class AppTest {
   public void lampTest() {
 
     PuzzleLibraryImpl pl = new PuzzleLibraryImpl();
-    Puzzle p = new PuzzleImpl(dum);
+    PuzzleImpl p = new PuzzleImpl(dum);
     pl.addPuzzle(p);
     ModelImpl m = new ModelImpl(pl);
 
@@ -62,7 +62,7 @@ public class AppTest {
   public void lampTest2() throws IOException {
 
     PuzzleLibraryImpl pl = new PuzzleLibraryImpl();
-    Puzzle p = new PuzzleImpl(puz);
+    PuzzleImpl p = new PuzzleImpl(puz);
     pl.addPuzzle(p);
     ModelImpl m = new ModelImpl(pl);
 

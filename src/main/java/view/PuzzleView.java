@@ -1,6 +1,6 @@
 package view;
 
-import controller.AlternateMvcController;
+import controller.ControllerImpl;
 import model.CellType;
 import javafx.geometry.Pos;
 import javafx.scene.Parent;
@@ -12,11 +12,12 @@ import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
+import org.w3c.dom.css.RGBColor;
 
 public class PuzzleView implements FXComponent {
-  private final AlternateMvcController controller;
+  private final ControllerImpl controller;
 
-  public PuzzleView(AlternateMvcController controller) {
+  public PuzzleView(ControllerImpl controller) {
     this.controller = controller;
   }
 
@@ -25,11 +26,15 @@ public class PuzzleView implements FXComponent {
 
     int width = controller.getActivePuzzle().getWidth();
     int height = controller.getActivePuzzle().getHeight();
+    String size = "small";
 
     GridPane panel = new GridPane();
     VBox container = new VBox();
 
     StackPane[][] board = new StackPane[width][height];
+    if (width > 10 || height > 10) {
+      size = "large";
+    }
 
     for (int i = 0; i < width; i++) {
       for (int j = 0; j < height; j++) {
@@ -68,7 +73,7 @@ public class PuzzleView implements FXComponent {
         if (controller.getActivePuzzle().getCellType(j, i) == CellType.CORRIDOR) {
           if (controller.isLit(j, i) && !controller.isLamp(j, i)) {
             s.setBackground(
-                new Background(new BackgroundFill(Color.LIGHTGOLDENRODYELLOW, null, null)));
+                new Background(new BackgroundFill(Color.valueOf("#fffe88"), null, null)));
           }
         }
 
@@ -76,7 +81,10 @@ public class PuzzleView implements FXComponent {
         s.getChildren().addAll(r, t);
 
         board[i][j] = s;
-        board[i][j].setMinSize(40, 40);
+        int minW = 40;
+        if (size.equals("large")) {minW = 25;}
+        int minH = minW;
+        board[i][j].setMinSize(minW, minH);
         board[i][j].setBorder(
             new Border(new BorderStroke(Color.BLACK, BorderStrokeStyle.SOLID, null, null)));
 
@@ -102,7 +110,7 @@ public class PuzzleView implements FXComponent {
     StackPane box = new StackPane();
     box.setMaxHeight(50);
 
-    Image image = new Image("success.png");
+    Image image = new Image("img/success.png");
     ImageView imageView = new ImageView();
     imageView.setImage(image);
     imageView.setOpacity(0);
@@ -126,13 +134,9 @@ public class PuzzleView implements FXComponent {
 
     box.getChildren().add(imageView);
     container.getChildren().add(panel);
-    container.getChildren().add(box);
-    container.getChildren().add(infoContainer);
     container.setAlignment(Pos.CENTER);
     container.setSpacing(20);
-    container.maxWidth(400);
 
-    container.setBackground(new Background(new BackgroundFill(Color.LIGHTGRAY, null, null)));
     return container;
   }
 }

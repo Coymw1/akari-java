@@ -3,27 +3,24 @@ package model;
 import java.util.ArrayList;
 import java.util.List;
 
-public class PuzzleLibraryImpl implements PuzzleLibrary {
-  private final List<Puzzle> puzzles;
+public class PuzzleLibraryImpl {
+  private final List<PuzzleImpl> puzzles;
 
   public PuzzleLibraryImpl() {
     this.puzzles = new ArrayList<>();
   }
 
-  @Override
-  public void addPuzzle(Puzzle puzzle) {
+  public void addPuzzle(PuzzleImpl puzzle) {
     if (puzzle == null) {
       throw new IllegalArgumentException("Cannot add null Puzzle to the library");
     }
     puzzles.add(puzzle);
   }
 
-  @Override
-  public Puzzle getPuzzle(int index) {
+  public PuzzleImpl getPuzzle(int index) {
     return puzzles.get(index);
   }
 
-  @Override
   public int size() {
     return puzzles.size();
   }

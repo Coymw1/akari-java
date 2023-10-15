@@ -1,7 +1,6 @@
 package view;
 
 
-import controller.AlternateMvcController;
 import controller.ControllerImpl;
 import javafx.stage.StageStyle;
 import model.*;
@@ -19,16 +18,18 @@ public class AppLauncher extends Application {
 
 
     // Model
-    PuzzleLibrary puzlib = new PuzzleLibraryImpl();
+    PuzzleLibraryImpl puzlib = new PuzzleLibraryImpl();
     puzlib.addPuzzle(new PuzzleImpl(SamplePuzzles.PUZZLE_01));
     puzlib.addPuzzle(new PuzzleImpl(SamplePuzzles.PUZZLE_02));
     puzlib.addPuzzle(new PuzzleImpl(SamplePuzzles.PUZZLE_03));
     puzlib.addPuzzle(new PuzzleImpl(SamplePuzzles.PUZZLE_04));
     puzlib.addPuzzle(new PuzzleImpl(SamplePuzzles.PUZZLE_05));
-    Model mod = new ModelImpl(puzlib);
+    puzlib.addPuzzle(new PuzzleImpl(SamplePuzzles.PUZZLE_06));
+    ModelImpl mod = new ModelImpl(puzlib);
 
     // Controller
-    AlternateMvcController cont = new ControllerImpl(mod);
+    ControllerImpl cont = new ControllerImpl();
+    cont.setModel(mod);
 
     // View
     View view = new View(cont);
@@ -36,24 +37,15 @@ public class AppLauncher extends Application {
 
     // Scene
     Scene scene = new Scene(view.render());
-    scene.getStylesheets().add("main.css");
     stage.initStyle(StageStyle.UNDECORATED);
     stage.setScene(scene);
 
-
     // Refresh view when model changes
     mod.addObserver(
-        (Model m) -> {
+        (ModelImpl m) -> {
           scene.setRoot(view.render());
           stage.setScene(scene);
         });
-
-    // Show the stage
-    stage.setTitle("Akari");
-    stage.setMinWidth(1000);
-    stage.setMinHeight(700);
-    stage.setMaxWidth(1200);
-    stage.setMaxHeight(800);
 
     stage.show();
   }
