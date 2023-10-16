@@ -14,37 +14,30 @@ import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
 import org.w3c.dom.css.RGBColor;
 
-public class PuzzleView implements FXComponent {
+public class PuzzleView {
   private final ControllerImpl controller;
+  private Parent container;
 
   public PuzzleView(ControllerImpl controller) {
     this.controller = controller;
   }
 
-  @Override
-  public Parent render() {
+  public Parent render(Boolean completionStatus) {
 
     int width = controller.getActivePuzzle().getWidth();
     int height = controller.getActivePuzzle().getHeight();
-    String size = "small";
+
 
     GridPane panel = new GridPane();
     VBox container = new VBox();
 
     StackPane[][] board = new StackPane[width][height];
-    if (width > 10 || height > 10) {
-      size = "large";
-    }
 
     for (int i = 0; i < width; i++) {
       for (int j = 0; j < height; j++) {
         StackPane s = new StackPane();
         s.setBackground(new Background(new BackgroundFill(Color.WHITE, null, null)));
         Rectangle r = new Rectangle();
-        Image img = new Image("file:/resources/light-bulb.png");
-        ImageView imgV = new ImageView(img);
-        imgV.setFitHeight(10);
-        imgV.setFitWidth(10);
 
         String tileInfo = null;
         if (controller.getActivePuzzle().getCellType(j, i) == CellType.CLUE) {
@@ -77,28 +70,79 @@ public class PuzzleView implements FXComponent {
           }
         }
 
+
+        //highlights border of all edge squares depending on the completion status of the puzzle
+        //-fx-border-style: top right bottom left
+        //follow the above order when concatenating string
+        String widthStyle = "-fx-border-width: ";
+        String colorStyle = "-fx-border-color: ";
+        if (completionStatus) {
+          //if i == 0, square is on left, and if j == 0, square is on at the top
+          if (j == 0) {
+            colorStyle = colorStyle + "#80ef2c ";
+            widthStyle = widthStyle + "3 ";
+          } else {
+            colorStyle = colorStyle + "#111111 ";
+            widthStyle = widthStyle + "1 ";
+          }
+
+          if (i == width - 1) {
+            colorStyle = colorStyle + "#80ef2c ";
+            widthStyle = widthStyle + "3 ";
+          } else {
+            colorStyle = colorStyle + "#111111 ";
+            widthStyle = widthStyle + "1 ";
+          }
+
+          if (j == width - 1) {
+            colorStyle = colorStyle + "#80ef2c ";
+            widthStyle = widthStyle + "3 ";
+          } else {
+            colorStyle = colorStyle + "#111111 ";
+            widthStyle = widthStyle + "1 ";
+          }
+
+          if (i == 0) {
+            colorStyle = colorStyle + "#80ef2c; ";
+            widthStyle = widthStyle + "3;";
+          } else {
+            colorStyle = colorStyle + "#111112; ";
+            widthStyle = widthStyle + "1;";
+          }
+
+          s.setStyle(colorStyle + widthStyle);
+
+        }
+
+
+        //formatting clue text
         Text t = new Text(tileInfo);
+        t.setStyle("-fx-font: Montserrat");
+        t.setStyle("-fx-font-size: 18pt");
         s.getChildren().addAll(r, t);
 
+
+        //determining the size of each square
+          // minW must be equal to minH
         board[i][j] = s;
         int minW = 40;
-        if (size.equals("large")) {minW = 25;}
+        if (width > 10 || height > 10) {minW = 25;}
         int minH = minW;
         board[i][j].setMinSize(minW, minH);
         board[i][j].setBorder(
             new Border(new BorderStroke(Color.BLACK, BorderStrokeStyle.SOLID, null, null)));
 
+        //handling lamp controls
         int finalJ = j;
         int finalI = i;
+
         s.setOnMouseClicked(
             e -> {
               if (controller.getActivePuzzle().getCellType(finalJ, finalI) == CellType.CORRIDOR) {
                 if (controller.isLamp(finalJ, finalI)) {
                   controller.removeLamp(finalJ, finalI);
-                  s.getChildren().remove(imgV);
                 } else {
                   controller.addLamp(finalJ, finalI);
-                  s.getChildren().add(imgV);
                 }
               }
             });
@@ -107,36 +151,12 @@ public class PuzzleView implements FXComponent {
         panel.setMaxWidth(40 * width);
       }
     }
-    StackPane box = new StackPane();
-    box.setMaxHeight(50);
 
-    Image image = new Image("img/success.png");
-    ImageView imageView = new ImageView();
-    imageView.setImage(image);
-    imageView.setOpacity(0);
-    imageView.setPreserveRatio(true);
-    imageView.setFitHeight(60);
-
-    if (controller.isSolved()) {
-      imageView.setOpacity(100);
-    }
-
-    // shows how many puzzles and current puzzle
-    StackPane infoContainer = new StackPane();
-    Text puzzleInfo =
-        new Text(
-            "Current puzzle: "
-                + (controller.currentPuzzleNum() + 1)
-                + " out of "
-                + controller.getLibrarySize());
-    puzzleInfo.setFont(Font.font("verdana", FontWeight.BOLD, null, 22));
-    infoContainer.getChildren().add(puzzleInfo);
-
-    box.getChildren().add(imageView);
     container.getChildren().add(panel);
     container.setAlignment(Pos.CENTER);
     container.setSpacing(20);
 
+    this.container = container;
     return container;
   }
 }

@@ -1,8 +1,5 @@
-package com.comp301.a09akari;
 
-import com.comp301.a09akari.model.*;
 import model.ModelImpl;
-import model.Puzzle;
 import model.PuzzleImpl;
 import model.PuzzleLibraryImpl;
 import org.junit.Test;

@@ -7,7 +7,7 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="510.0" prefWidth="792.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.ControllerImpl">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="510.0" prefWidth="792.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.FXMLController">
    <children>
       <Pane fx:id="topBar" onMouseDragged="#dragStage" onMousePressed="#pressTopBar" prefHeight="61.0" prefWidth="792.0" style="-fx-background-color: #cc686b;">
          <children>
@@ -15,6 +15,7 @@
             <HBox fx:id="maxButton" layoutX="670.0" layoutY="7.0" onMouseClicked="#handleMaxOnClick" onMouseEntered="#maxHover" onMouseExited="#maxExited" onMousePressed="#maxPressed" onMouseReleased="#maxReleased" prefHeight="47.0" prefWidth="58.0" style="-fx-background-color: #cc686b;" />
             <HBox fx:id="minButton" layoutX="612.0" layoutY="7.0" onMouseClicked="#handleMinOnClick" onMouseEntered="#minHover" onMouseExited="#minExited" onMousePressed="#minPressed" onMouseReleased="#minReleased" prefHeight="47.0" prefWidth="58.0" style="-fx-background-color: #cc686b;" />
             <HBox fx:id="iconBox" layoutX="7.0" layoutY="7.0" prefHeight="47.0" prefWidth="47.0" />
+            <HBox fx:id="titleBox" layoutX="296.0" layoutY="-7.0" prefHeight="61.0" prefWidth="200.0" />
          </children>
       </Pane>
     <AnchorPane layoutX="592.0" layoutY="190.0" minHeight="0.0" minWidth="0.0" prefHeight="106.0" prefWidth="169.0" />
@@ -53,5 +54,6 @@
             <Font name="Cabin SemiCondensed Regular" size="18.0" />
          </font>
       </TextField>
+      <HBox fx:id="completedBox" disable="true" layoutX="47.0" layoutY="108.0" prefHeight="356.0" prefWidth="353.0" />
    </children>
 </Pane>

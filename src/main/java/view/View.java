@@ -1,6 +1,7 @@
 package view;
 
 import controller.ControllerImpl;
+import controller.FXMLController;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.stage.Stage;
@@ -10,7 +11,7 @@ import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
 
-public class View implements FXComponent {
+public class View {
 
   private final ControllerImpl controller;
   private Stage stage;
@@ -20,7 +21,6 @@ public class View implements FXComponent {
     this.controller = controller;
   }
 
-  @Override
   public Parent render() {
     return render(stage);
   }
@@ -44,11 +44,12 @@ public class View implements FXComponent {
       throw new RuntimeException(e);
     }
 
-    ControllerImpl c = fx.getController();
-    c.setModel(controller.getModel());
-    c.showPuzzle(controller);
-    c.setStatusText(controller);
-    c.loadIcons();
+    FXMLController viewController = fx.getController();
+    viewController.setController(controller);
+    viewController.showPuzzle(controller);
+    viewController.setStatusText(controller);
+    viewController.loadIcons();
+    viewController.showCompleted();
 
     return root;
   }

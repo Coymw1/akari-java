@@ -14,8 +14,6 @@ public class AppLauncher extends Application {
 
   @Override
   public void start(Stage stage) throws IOException {
-    //Stage
-
 
     // Model
     PuzzleLibraryImpl puzlib = new PuzzleLibraryImpl();
@@ -47,6 +45,7 @@ public class AppLauncher extends Application {
           stage.setScene(scene);
         });
 
+    //show stage
     stage.show();
   }
 
