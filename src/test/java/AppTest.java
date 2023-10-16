@@ -6,7 +6,8 @@ import org.junit.Test;
 
 import java.io.IOException;
 
-import static org.junit.Assert.*;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+
 
 /** Unit test for simple App. */
 public class AppTest {
