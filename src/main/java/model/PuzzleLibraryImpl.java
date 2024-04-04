@@ -12,7 +12,7 @@ public class PuzzleLibraryImpl {
 
   public void addPuzzle(PuzzleImpl puzzle) {
     if (puzzle == null) {
-      throw new IllegalArgumentException("Cannot add null Puzzle to the library");
+      throw new IllegalArgumentException("Missing puzzle to be added to the library");
     }
     puzzles.add(puzzle);
   }

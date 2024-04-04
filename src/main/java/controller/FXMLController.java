@@ -1,17 +1,17 @@
 package controller;
 
 import javafx.fxml.FXML;
+import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.TextField;
+import javafx.scene.effect.BlurType;
+import javafx.scene.effect.DropShadow;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.HBox;
-import javafx.scene.layout.Pane;
-import javafx.scene.layout.Region;
+import javafx.scene.layout.*;
+import javafx.scene.paint.Color;
 import javafx.stage.Stage;
-import model.ModelImpl;
-import model.PuzzleImpl;
 import view.PuzzleView;
 
 public class FXMLController {
@@ -23,10 +23,16 @@ public class FXMLController {
 
   private double xOffset;
   private double yOffset;
+  private double defaultWidth;
+  private double defaultHeight;
+  private Background defaultBackground;
+  private Boolean fullStatus;
   public FXMLController() {
-
+    fullStatus = false;
   }
   public void setController(ControllerImpl cont) {this.modelController = cont;}
+  @FXML
+  private BorderPane windowContainer;
   @FXML
   private HBox iconBox;
   @FXML
@@ -57,9 +63,16 @@ public class FXMLController {
   private HBox completedBox;
   @FXML
   private Pane topBar;
+  @FXML
+  private Pane content;
 
   @FXML
-  public void initialize() {}
+  public void initialize() {
+    windowShadow(fullStatus);
+    defaultHeight = content.getHeight();
+    defaultWidth = content.getWidth();
+    defaultBackground = content.getBackground();
+  }
   @FXML
   public void showPuzzle(ControllerImpl c) {
     PuzzleView pv = new PuzzleView(c);
@@ -80,6 +93,26 @@ public class FXMLController {
     completedBox.getChildren().add(completed);
     completedBox.setAlignment(Pos.CENTER);
 
+
+  }
+
+  @FXML
+  public void windowShadow(Boolean status) {
+    if (!status) {
+      Insets bgInsets = new Insets(5);
+      BackgroundFill bgFill = new BackgroundFill(Color.TRANSPARENT, null, bgInsets);
+      windowContainer.setBackground(new Background(bgFill));
+      windowContainer.setEffect(new DropShadow(BlurType.GAUSSIAN, Color.rgb(70,70, 70), 10, -100, 0, 0));
+    } else {
+      Insets bgInsets = new Insets(0);
+      BackgroundFill bgFill = new BackgroundFill(Color.valueOf("#eeeeee"), null, bgInsets);
+      windowContainer.setBackground(new Background(bgFill));
+      windowContainer.setEffect(new DropShadow(0, Color.GRAY));
+    }
+  }
+  @FXML
+  public void resize(Boolean status) {
+    windowShadow(status);
 
   }
   @FXML
@@ -119,7 +152,7 @@ public class FXMLController {
   }
   @FXML
   public void setStatusText(ControllerImpl c) {
-    currentPuzzle.setText("Current puzzle: " + (modelController.currentPuzzleNum() + 1) + " out of " + modelController.getLibrarySize());
+    currentPuzzle.setText((modelController.currentPuzzleNum() + 1) + " out of " + modelController.getLibrarySize());
   }
   @FXML
   void dragStage(MouseEvent event) {
@@ -254,11 +287,11 @@ public class FXMLController {
         stage.setIconified(true);
       }
       if (r.getId().equals("maxButton")) {
-        Boolean fullStatus = false;
         Stage stage = (Stage) ((HBox) e.getSource()).getScene().getWindow();
         if (fullStatus) {fullStatus = false;}
         else {fullStatus = true;}
-        stage.setFullScreen(fullStatus);
+        resize(fullStatus);
+        stage.setMaximized(fullStatus);
       }
       if (r.getId().equals("exitButton")) {
         Stage stage = (Stage) ((HBox) e.getSource()).getScene().getWindow();

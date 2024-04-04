@@ -5,6 +5,7 @@ import java.util.List;
 
 public class ModelImpl {
   private final PuzzleLibraryImpl puzzleLib;
+  //lightLib tracks lamp placement for each puzzle in puzzleLib
   private final List<int[][]> lightLib;
   private int currentPuzzleIndex;
   private final List<ModelObserver> observers;
@@ -341,4 +342,6 @@ public class ModelImpl {
     }
     return status > getActivePuzzle().getClue(r, c);
   }
+
+
 }

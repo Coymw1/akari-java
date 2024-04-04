@@ -1,18 +1,7 @@
 package controller;
 
-import javafx.fxml.FXML;
-import javafx.geometry.Pos;
-import javafx.scene.control.TextField;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
-import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.HBox;
-import javafx.scene.layout.Pane;
-import javafx.scene.layout.Region;
-import javafx.stage.Stage;
 import model.ModelImpl;
 import model.PuzzleImpl;
-import view.PuzzleView;
 
 public class ControllerImpl {
 

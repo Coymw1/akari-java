@@ -32,4 +32,18 @@ public class PuzzleImpl {
       return cellNum;
     } else {throw new IllegalArgumentException();}
   }
+
+  public void outputPuzzle() {
+    for (int i = 0; i < getHeight(); i++) {
+      for (int j = 0; j < getWidth(); j++) {
+        System.out.print(b[i][j] + " | ");
+      }
+      String rowLine = "";
+      for (int x = 0; x < getWidth(); x++) {
+        rowLine = rowLine + "----";
+      }
+      System.out.println('\n' + rowLine);
+    }
+
+  }
 }

@@ -2,6 +2,7 @@
 import model.ModelImpl;
 import model.PuzzleImpl;
 import model.PuzzleLibraryImpl;
+import model.PuzzleSolver;
 import org.junit.Test;
 
 import java.io.IOException;
@@ -67,6 +68,12 @@ public class AppTest {
     m.addLamp(3,0);
     m.resetPuzzle();
     assertFalse(m.isLamp(3,0));
+  }
+
+  @Test
+  public void puzzleSolverTest() {
+    //PuzzleSolver p = new PuzzleSolver();
+    //p.solvePuzzle();
   }
 
 }
