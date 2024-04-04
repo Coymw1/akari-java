@@ -9,5 +9,8 @@
         <module name="a09-akari" />
       </profile>
     </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="akari-java" target="1.8" />
+    </bytecodeTargetLevel>
   </component>
 </project>
