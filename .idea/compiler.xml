@@ -6,11 +6,11 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
-        <module name="a09-akari" />
+        <module name="akari-java" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
-      <module name="akari-java" target="1.8" />
+      <module name="a09-akari" target="1.8" />
     </bytecodeTargetLevel>
   </component>
 </project>
